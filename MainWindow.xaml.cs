@@ -103,7 +103,7 @@ namespace DiskReader
         {
             TreeViewItem tvi = e.OriginalSource as TreeViewItem;
             string identifier= ((string)tvi.Header).Replace("Physical Drive ","");
-            String text = Mapping.getLabelIdentifierOnly(identifier);
+            String text = Mapping.getLabelIdentifierOnly(identifier+".asd", "C:\\Users\\XuJesseW\\Documents\\Programming\\");
             labelBox.Text = text;
         }
     }
