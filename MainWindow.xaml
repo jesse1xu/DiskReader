@@ -6,26 +6,81 @@
         xmlns:local="clr-namespace:DiskReader"
         mc:Ignorable="d"
         xmlns:self="clr-namespace:DiskReader"
-        Title="MainWindow" Height="500" Width="650">
-    <Grid Margin="0">
+        Title="MainWindow" Height="480" Width="740">
+    <Grid Margin="0,0,0.333,-0.333">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="451" VerticalAlignment="Top" Width="743" Margin="0,0,-10,0">
+            <TabItem Header="Home">
+                <Grid Background="#FFE5E5E5" Margin="-9,-1,6.667,-2.333">
+                    <Border BorderBrush="#FF828790" BorderThickness="0" HorizontalAlignment="Left" Height="34" Margin="194,363,0,0" VerticalAlignment="Top" Width="517" Background="#FFE4DFDF"/>
 
-        <TreeView Name="trvMenu" Margin="35,33,448,27" TreeViewItem.Selected="treeViewItem_MouseLeftButtonUp"
-            ItemsSource="{Binding}">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type self:MenuItem}" ItemsSource="{Binding Items}">
-                    <TextBlock Text="{Binding Title}" />
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-            <!--<Style TargetType="{x:Type MenuItem}">
+                    <TreeView x:Name="trvMenu" Margin="25,21,567,17" TreeViewItem.Selected="treeViewItem_MouseLeftButtonUp"
+            ItemsSource="{Binding}" Background="#FFE4DFDF">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate DataType="{x:Type self:MenuItem}" ItemsSource="{Binding Items}">
+                                <TextBlock Text="{Binding Title}" />
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                        <!--<Style TargetType="{x:Type MenuItem}">
                 <EventSetter Event="MouseLeftButtonUp"
                              Handler="treeViewItem_MouseLeftButtonUp">
                 </EventSetter>
             </Style>-->
-        </TreeView>
-        <Border BorderBrush="#FF0093F9" BorderThickness="1,0" HorizontalAlignment="Left" Height="309" Margin="237,63,0,0" VerticalAlignment="Top" Width="366">
-            <TextBox Name="labelBox" HorizontalAlignment="Left" Height="288" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="308" Margin="21,11,0,0" BorderBrush="{x:Null}"/>
-        </Border>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="44" Margin="237,392,0,0" VerticalAlignment="Top" Width="366"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="237,33,0,0" TextWrapping="Wrap" Text="Lun:" VerticalAlignment="Top" Width="366" BorderBrush="{x:Null}"/>
+                    </TreeView>
+                    <Border BorderBrush="#FF0093F9" BorderThickness="1,0" HorizontalAlignment="Left" Height="287" Margin="194,64,0,0" VerticalAlignment="Top" Width="517" Background="White">
+                        <TextBox x:Name="labelBox" HorizontalAlignment="Left" Margin="8.667,16,0,-0.333" TextWrapping="Wrap" Text="" Width="173" BorderThickness="0" FontWeight="Bold"/>
+                    </Border>
+                    <TextBox x:Name="lunName" HorizontalAlignment="Left" Height="26" Margin="194,21,0,0" TextWrapping="Wrap" Text="LUN" VerticalAlignment="Top" Width="517" BorderBrush="Black" Background="White" FontWeight="Bold" TextAlignment="Center" FontSize="14" BorderThickness="1,1,1,0" Padding="0,1,0,0"/>
+                    <TextBox x:Name="labelInfo" HorizontalAlignment="Left" Height="271" Margin="394,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="290" BorderThickness="0"/>
+                    <Button x:Name="logButton" Content="Log Output" HorizontalAlignment="Left" Click="logOutputClicked" Height="27" Margin="617,368,0,0" VerticalAlignment="Top" Width="75"/>
+                    <TextBox x:Name="logDestination" HorizontalAlignment="Left" Height="25" Margin="281,369,0,0" TextWrapping="Wrap" TextChanged="logDestinationTextChanged" Text="" VerticalAlignment="Top" Width="331" Padding="0,2,0,0" UseLayoutRounding="True" BorderThickness="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="25" Margin="194,372,0,0" TextWrapping="Wrap" Text="Log Output To:" VerticalAlignment="Top" Width="85" BorderThickness="0" Background="{x:Null}"/>
+                    <Button x:Name="logBrowseButton" Click="logBrowseButton_Click" Content="Button" HorizontalAlignment="Left" Height="22" Margin="593,369,0,0" VerticalAlignment="Top" Width="15" BorderThickness="0,1,1,1" BorderBrush="#FFABADB3" RenderTransformOrigin="0.578,0.404">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Image Source="C:\Users\XuJesseW\source\repos\DiskReadLibrary\DiskReadClient\open file icon.jpg"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Config">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox HorizontalAlignment="Left" Height="25" Margin="33,38,0,0" TextWrapping="Wrap" Text="Logical Disks" VerticalAlignment="Top" Width="661"  Background="{x:Null}" BorderBrush="#FF828790" BorderThickness="0,0,0,1" Padding="0,2,0,0" Foreground="Black"/>
+                    <TextBox HorizontalAlignment="Left" Height="25" Margin="33,167,0,0" TextWrapping="Wrap" Text="Settings" VerticalAlignment="Top" Width="661"  Background="{x:Null}" BorderBrush="#FF828790" BorderThickness="0,0,0,1" Padding="0,2,0,0" Foreground="Black"/>
+                    <TextBox HorizontalAlignment="Left" Height="20" Margin="33,78,0,0" TextWrapping="Wrap" Text="Search for disks in:" VerticalAlignment="Top" Width="105"  Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <TextBox x:Name="logicalDiskDestination" HorizontalAlignment="Left" Height="25" Margin="142,76,0,0" TextWrapping="Wrap" TextChanged="logicalDiskDestinationTextChanged" Text="C:\\ProgramData\\Unisys\\MCP Firmware\\Vdisks" VerticalAlignment="Top" Width="425" Padding="0,2,0,0" UseLayoutRounding="True" BorderThickness="1"/>
+                    <Button x:Name="logicalDiskBrowseButton" Click="logicalDiskBrowseButton_Click" Content="Button" HorizontalAlignment="Left" Height="22" Margin="549,78,0,0" VerticalAlignment="Top" Width="15" BorderThickness="0,1,1,1" BorderBrush="#FFABADB3" RenderTransformOrigin="5.911,0.576">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Image Source="C:\Users\XuJesseW\source\repos\DiskReadLibrary\DiskReadClient\open file icon.jpg"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <TextBox HorizontalAlignment="Left" Height="20" Margin="33,112,0,0" TextWrapping="Wrap" Text="Look for files of type:" VerticalAlignment="Top" Width="122"  Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <ComboBox x:Name="filetypeBox" HorizontalAlignment="Left" Height="25" Margin="155,110,0,0" VerticalAlignment="Top" Width="151" Background="White" BorderBrush="White" IsEditable="True">
+                        <ComboBoxItem Content="both .asd and .vdlun" HorizontalAlignment="Left" Width="126" Margin="0,0,-2,0"/>
+                        <ComboBoxItem Content="only .asd files" HorizontalAlignment="Left" Width="124"/>
+                        <ComboBoxItem Content="only .vdlun files" HorizontalAlignment="Left" Width="124"/>
+                    </ComboBox>
+                    <Button x:Name="reinitializeButton" Content="Reinitialize" HorizontalAlignment="Left" Height="25" Margin="584,366,0,0" VerticalAlignment="Top" Width="110" Click="reinitializeButton_Click"/>
+                    <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="15" Margin="35,208,0,0" VerticalAlignment="Top" Width="13" IsChecked="True"/>
+                    <TextBox HorizontalAlignment="Left" Height="20" Margin="53,208,0,0" TextWrapping="Wrap" Text="Display confirmation popups" VerticalAlignment="Top" Width="238"  Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <TextBox HorizontalAlignment="Left" Height="20" Margin="33,78,0,0" TextWrapping="Wrap" Text="Search for disks in:" VerticalAlignment="Top" Width="105"  Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="15" Margin="35,228,0,0" VerticalAlignment="Top" Width="13" IsChecked="True"/>
+                    <TextBox HorizontalAlignment="Left" Height="20" Margin="53,228,0,0" TextWrapping="Wrap" Text="Check if user has administrator privileges" VerticalAlignment="Top" Width="238"  Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="15" Margin="35,248,0,0" VerticalAlignment="Top" Width="13" RenderTransformOrigin="0.538,1.8"/>
+                    <TextBox HorizontalAlignment="Left" Height="20" Margin="53,248,0,0" TextWrapping="Wrap" Text="Include file location in output logs" VerticalAlignment="Top" Width="238"  Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <CheckBox x:Name="readOnlyCheckBox" Content="CheckBox" HorizontalAlignment="Left" Height="15" Margin="35,143,0,0" VerticalAlignment="Top" Width="13" IsChecked="True" Checked="readOnly_Checked" Unchecked="readOnly_Unchecked"/>
+                    <TextBox HorizontalAlignment="Left" Height="20" Margin="53,142,0,0" TextWrapping="Wrap" Text="Disks are Read-Only (WARNING)" VerticalAlignment="Top" Width="238"  Background="{x:Null}" BorderBrush="{x:Null}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Help" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
